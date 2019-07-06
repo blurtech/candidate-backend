@@ -116,6 +116,7 @@ HOST: http://api.candidate.blur.tech
             "success": true,
             "data": [
                 {
+                    "title": "Ремонт дороги на Федосеева",
                     "geo": {
                         "city": "Новосибирск",
                         "district": "Октябрьский"
@@ -149,6 +150,7 @@ HOST: http://api.candidate.blur.tech
             "success": true,
             "data": [
                 {
+                    "title": "Ремонт дороги на Федосеева",
                     "geo": {
                         "city": "Новосибирск",
                         "district": "Октябрьский"
@@ -166,7 +168,7 @@ HOST: http://api.candidate.blur.tech
             ]
         }
 
-### Добавление инициативы [POST]
+### Добавление инициативы [POST/initiative/create]
 
 + Request
     + Headers
@@ -207,4 +209,71 @@ HOST: http://api.candidate.blur.tech
             "data": {
                 "message": "Successful edit initiative"
             }
+        }
+
+## Голосование [/swipe]
+
+### Отдать голос [POST]
+
++ Request
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkMjA1MTZhNzRjZTdmNWYwYzZhZTUxNCIsInVzZXJuYW1lIjoiTWFjT1NPIiwiaWF0IjoxNTYyNDE5NDE3fQ.iUkaK5EAp89bXi4nKrYIn3upNAjTe6VxE4uQOcnBpIg
+
++ Request 200 (application/json)
+
+        {"id": "5d209654562592316cdc1800", "vote":"Like"}
+
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data": {}
+        }
+
+### Следующие народные инициативы для просмотра [GET/swipe/next-swipes]
+
++ Request
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkMjA1MTZhNzRjZTdmNWYwYzZhZTUxNCIsInVzZXJuYW1lIjoiTWFjT1NPIiwiaWF0IjoxNTYyNDE5NDE3fQ.iUkaK5EAp89bXi4nKrYIn3upNAjTe6VxE4uQOcnBpIg
+
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data": [
+            {
+                "geo": {
+                    "city": "Новосибирск",
+                    "district": "Октябрьский"
+                },
+                "voters": [
+                    "5d20516a74ce7f5f0c6ae514"
+                ],
+                "_id": "5d209654562592316cdc1800",
+                "describe": "На улице Федосеева 10 после проведения сезонных мероприятий повредилось дорожное полотно, которое требует восстановления, иначе ямы начнут работать как лежачий полицейский, что в условиях крутого поворота возле школы не лучшая затея.",
+                "creator": "MacOSO",
+                "createdAt": "2019-07-06T12:38:44.345Z",
+                "updatedAt": "2019-07-06T17:38:10.098Z",
+                "__v": 0,
+                "title": "Ремонт дороги на Федосеева"
+            },
+            {
+                "geo": {
+                    "city": "Новосибирск",
+                    "district": "Советский"
+                },
+                "voters": [
+                    "5d20516a74ce7f5f0c6ae514"
+                ],
+                "_id": "5d20b29610fe681ff8e201ea",
+                "describe": "Возле нового корпуса НГУ светофоры уже разваливаются от старости и частично не работают, неплохо бы было их починить.",
+                "creator": "MacOSO",
+                "createdAt": "2019-07-06T14:39:18.709Z",
+                "updatedAt": "2019-07-06T17:37:39.684Z",
+                "__v": 0,
+                "title": "Установка светофоров возле нового корпуса НГУ"
+            }
+            ]
         }
