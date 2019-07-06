@@ -36,7 +36,6 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
-    "aglio": "^2.3.0",
     "eslint": "^6.0.1",
     "nodemon": "^1.19.1"
   }
