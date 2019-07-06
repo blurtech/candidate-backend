@@ -23,7 +23,7 @@ const findAllInitiatives = () => Initiative.find();
 
 const findInitiativesForUser = async (username) => {
     let notIn = username.history.map(val => val.initiative._id);
-    let finded = await Initiative.find({id: { $nin: notIn}});
+    let finded = await Initiative.find({_id: { $nin: notIn}});
     return finded;
 };
 
