@@ -22,7 +22,7 @@ const definition = {
         required: [true, 'Password required']
     },
     token: String,
-    voted: [{type:Schema.Types.ObjectId, ref: 'Event'}]
+    voted: [{type:Schema.Types.ObjectId, ref: 'Initiative'}]
 };
 
 const options = {

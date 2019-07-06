@@ -14,15 +14,6 @@ exports.create = (req, res) => {
         });
     }
 
-    if(!data.city) {
-        return res.validationError({
-            errors: [{
-                path: 'city',
-                message: 'Initiative needs city'
-            }]
-        });
-    }
-
     data.creator = creator.username;
     data.voters = [creator._id];
 

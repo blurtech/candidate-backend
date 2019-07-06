@@ -1,8 +1,8 @@
 const Initiative = require('./model');
 
 const saveInitiative = (data, saveCb) => {
-    const Initiative = new Initiative(data);
-    return Initiative.save(saveCb);
+    const user = new Initiative(data);
+    return user.save(saveCb);
 };
 
 const editInitiative = (Initiative, data, saveCb) => {
@@ -16,7 +16,7 @@ const findInitiativeByID = (id) => Initiative.findById(id);
 
 const findInitiativesByID = (idArr) => Initiative.where('_id').in(idArr);
 
-const findAllInitiatives = () => Initiative.find().where('date').gte(new Date());
+const findAllInitiatives = () => Initiative.find();
 
 const addUserToInitiative = async (Initiative, user, saveCb) => {
     const _Initiative = await Initiative.findById(Initiative.id);
