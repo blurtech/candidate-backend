@@ -59,16 +59,9 @@ const addInitiativeToUser = async (user, initiativeId, saveCb) => {
     return _user.save(saveCb);
 };
 
-const removeInitiativeFromUser = async (user, initiativeId, saveCb) => {
-    const _user = await User.findById(user.id);
-    return _user.save(saveCb);
-};
+const removeInitiativeFromUser = addInitiativeToUser;
 
 const voteForInitiative = async (user, initiativeId, _vote,saveCb) => {
-    //console.log(user + " " + initiativeId+ " "+ _vote);
-    //const _user = await User.findById(user.id);
-    //console.log(user);
-    //const _initiative = Initiative.findInitiativeByID(initiativeId);
     await user.history.push({initiative: initiativeId, vote: _vote});
     return user.save(saveCb);
 };

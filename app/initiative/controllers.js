@@ -71,29 +71,3 @@ exports.edit = (req, res) => {
         return res.unprocessableEntity(err);
     }); 
 };
-
-/**
- * Request json example:
- * {
-        id: String
- * }
- */
-exports.vote = async (req, res) => {
-    const { user }  = req;
-    const { id, like } = req.body;
-    try {
-        if(like === "Like") {
-            const currentInitiative = await repository.findInitiativeByID(id);
-            await repository.addUserToInitiative(currentInitiative, user);
-            await userRepository.addInitiativeToUser(user, currentInitiative._id);
-            return res.success({message: 'Successful vote'});
-        } else {
-            const currentInitiative = await repository.findInitiativeByID(id);
-            await repository.addUserToInitiative(currentInitiative, user);
-            await userRepository.addInitiativeToUser(user, currentInitiative._id);
-            return res.success({message: 'Successful vote'});
-        }
-    } catch(err) {
-        return res.unprocessableEntity(err);        
-    }
-};

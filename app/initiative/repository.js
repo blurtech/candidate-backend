@@ -22,11 +22,7 @@ const findInitiativesByID = (idArr) => Initiative.where('_id').in(idArr);
 const findAllInitiatives = () => Initiative.find();
 
 const findFiveInitiativesForUser = async (username) => {
-    //console.log(username.history);
-    //let notIn = await UserRepository.findUserByID(username.id);
-
-    notIn = username.history.map(val => val.initiative._id);
-    //console.log(notIn);
+    let notIn = username.history.map(val => val.initiative._id);
     return Initiative.find({id: { $nin: notIn}}).limit(5);
 };
 
