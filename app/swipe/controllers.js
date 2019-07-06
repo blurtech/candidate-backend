@@ -30,6 +30,6 @@ exports.getForSwipes = async (req, res) => {
         });
     }
 
-    const initiatives = await initiativeRepository.findFiveInitiativesForUser(user);
+    const initiatives = await initiativeRepository.findInitiativesForUser(user);
     return res.success(initiatives);
 };
