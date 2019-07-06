@@ -15,7 +15,7 @@ exports.swipe = (req, res) => {
     }
 
     userRepository.voteForInitiative(user, data.id, data.vote);
-    return res.success();
+    return res.success(null);
 };
 
 exports.getForSwipes = async (req, res) => {

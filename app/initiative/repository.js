@@ -23,7 +23,8 @@ const findAllInitiatives = () => Initiative.find();
 
 const findFiveInitiativesForUser = async (username) => {
     let notIn = username.history.map(val => val.initiative._id);
-    return Initiative.find({id: { $nin: notIn}}).limit(5);
+    const init = await Initiative.find({_id: { $nin: notIn}}).limit(5);
+    return init;
 };
 
 const addUserToInitiative = async (Initiative, user, saveCb) => {
