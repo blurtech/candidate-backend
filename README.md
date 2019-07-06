@@ -8,7 +8,7 @@ Server part of the application Candidate created whithin the framework of the ha
 `npm start` - start nodejs application  
 `npm run dev` - start application with nodemon  
 `npm run lint` and `npm run lint-fix` - launch eslint  
-`npm run api-doc` - generate documentation from [api.apib](docs/api.apib) file (Swagger)
+`npm run api-doc` - generate documentation from [apiary.apib](docs/apiary.apib) file (Swagger)
 
 ## Documentation
 

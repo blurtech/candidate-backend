@@ -56,13 +56,11 @@ const findUsernamesById = (idArr) => User.where('_id').in(idArr).select('usernam
 
 const addInitiativeToUser = async (user, initiativeId, saveCb) => {
     const _user = await User.findById(user.id);
-    await _user.set('voted', user.voted.filter(initiative => !initiative.equals(initiativeId)).concat(initiativeId));
     return _user.save(saveCb);
 };
 
 const removeInitiativeFromUser = async (user, initiativeId, saveCb) => {
     const _user = await User.findById(user.id);
-    await _user.set('voted', user.voted.filter(initiative => !initiative.equals(initiativeId)));
     return _user.save(saveCb);
 };
 

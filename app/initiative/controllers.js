@@ -80,31 +80,19 @@ exports.edit = (req, res) => {
  */
 exports.vote = async (req, res) => {
     const { user }  = req;
-    const { id } = req.body;
+    const { id, like } = req.body;
     try {
-        const currentInitiative = await repository.findInitiativeByID(id);
-        await repository.addUserToInitiative(currentInitiative, user);
-        await userRepository.addInitiativeToUser(user, currentInitiative._id);
-        return res.success({message: 'Successful vote'});
-    } catch(err) {
-        return res.unprocessableEntity(err);        
-    }
-};
-
-/**
- * Request json example:
- * {
-        id: String
- * }
- */
-exports.unvote = async (req, res) => {
-    const { user }  = req;
-    const { id } = req.body;
-    try {
-        const currentInitiative = await repository.findInitiativeByID(id);
-        await userRepository.removeInitiativeFromUser(user, currentInitiative._id);
-        await repository.removeUserFromInitiative(currentInitiative, user);
-        return res.success({message: 'Successful unvote'});
+        if(like === "Like") {
+            const currentInitiative = await repository.findInitiativeByID(id);
+            await repository.addUserToInitiative(currentInitiative, user);
+            await userRepository.addInitiativeToUser(user, currentInitiative._id);
+            return res.success({message: 'Successful vote'});
+        } else {
+            const currentInitiative = await repository.findInitiativeByID(id);
+            await repository.addUserToInitiative(currentInitiative, user);
+            await userRepository.addInitiativeToUser(user, currentInitiative._id);
+            return res.success({message: 'Successful vote'});
+        }
     } catch(err) {
         return res.unprocessableEntity(err);        
     }

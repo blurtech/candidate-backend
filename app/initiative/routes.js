@@ -17,8 +17,6 @@ router.post('/create', authenticateMiddleware, controller.create);
 
 router.post('/vote', authenticateMiddleware, controller.vote);
 
-router.post('/unvote', authenticateMiddleware, controller.unvote);
-
 /**
  * Export a router with paths
  * GET: /
@@ -26,6 +24,5 @@ router.post('/unvote', authenticateMiddleware, controller.unvote);
  * PATCH: /:id
  * POST: /create
  * POST: /vote
- * POST: /unvote
  */
 module.exports = router;
