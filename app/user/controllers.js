@@ -37,58 +37,15 @@ exports.login = (req, res) => {
     })(req, res);
 };
 
-exports.register = (req, res) => {
-    const username = req.body.username;
-    const password = req.body.password;
-
-    if(!username || username.length < 6) {
-        return res.validationError({
-            errors: [{
-                path: 'username',
-                message: 'Please pass username'
-            }]
-        });
-    }
-
-    if(!password) {
-        return res.validationError({
-            errors: [{
-                path: 'password',
-                message: 'Please pass password'
-            }]
-        });
-    }
-
-    repository.saveUser({
-        username,
-        password
-    }, (err) => {
-        if (err) {
-            return res.validationError(err);
-        }
-        return res.success({message: 'Successful created new user'});
-    });
-};
-
-exports.profile = (req, res) => {
+exports.profile = async (req, res) => {
     const username = req.params.username;
-    repository.findUserByUsername(username)
-    .then(user_info => {
-        if (!user_info) {
-            return res.notFound();
-        }
-        return initiativeRepository.findInitiativesByID(user_info.subscribed)
-        .then(initiatives =>  res.success({user_info, initiatives}));
-    })
-    .catch(err => {
-        return res.serverError(err);
-    });
+    const user = await repository.findUserByUsername(username);
+    return res.success(user);
 };
 
 exports.currentUser = async (req, res) => {
     const user_info = await repository.selectUserPublicInfo(req.user);
-    const initiatives = await initiativeRepository.findInitiativesByID(user_info.subscribed);
-    return res.success({user_info, initiatives});
+    return res.success(user_info);
 };
 
 exports.editProfile = (req, res) => {

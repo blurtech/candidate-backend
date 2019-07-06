@@ -1,28 +1,39 @@
 const mongoose = require('mongoose'),
     uniqueValidator = require('mongoose-unique-validator'),
     bcrypt = require('bcrypt-nodejs');
+
 const { Schema } = mongoose;
 
 const definition = {
     username: {
         type: String,
         unique: true,
-        validate: {
-            validator: (v) =>  v.length > 5 && v.length < 32,
-            message: '{VALUE} is not a valid username! Must be > 5 and < 32'
-        },
         required: [true, 'Username required']
     },
     password: {
         type: String,
-        validate: {
-            validator: (v) =>  v.length > 3,
-            message: '{VALUE} is not a valid password!'
-        },
         required: [true, 'Password required']
     },
-    token: String,
-    voted: [{type:Schema.Types.ObjectId, ref: 'Initiative'}]
+    geo: {
+        city: {
+            type: String,
+            required: [true, 'City required']
+        },
+        district: {
+            type: String,
+            required: [true, 'District required']
+        }
+    },
+    preferences: [String],
+    history: [
+        {
+            initiative: {type:Schema.Types.ObjectId, ref: 'Initiative'},
+            vote: {
+                type: String,
+                enum : ['Like', 'Dislike', 'Superlike']
+            }
+        }],
+    token: String
 };
 
 const options = {

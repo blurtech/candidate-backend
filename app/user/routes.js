@@ -12,8 +12,6 @@ router.get('/', authenticateMiddleware, controller.tryWithJWT);
 
 router.post('/login', controller.login);
 
-router.post('/register', controller.register);
-
 router.get('/profile', authenticateMiddleware, controller.currentUser);
 
 router.patch('/profile', authenticateMiddleware, controller.editProfile);
