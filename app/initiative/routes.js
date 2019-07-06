@@ -15,8 +15,6 @@ router.patch('/:id', authenticateMiddleware, controller.edit);
 
 router.post('/create', authenticateMiddleware, controller.create);
 
-router.post('/vote', authenticateMiddleware, controller.vote);
-
 /**
  * Export a router with paths
  * GET: /

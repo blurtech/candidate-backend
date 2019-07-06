@@ -14,14 +14,11 @@ exports.swipe = (req, res) => {
         });
     }
 
-    //console.log(user);
-
     userRepository.voteForInitiative(user, data.id, data.vote);
     return res.success();
 };
 
 exports.getForSwipes = async (req, res) => {
-    const data = req.body;
     const user = req.user;
 
     if(!user) {
@@ -34,6 +31,5 @@ exports.getForSwipes = async (req, res) => {
     }
 
     const initiatives = await initiativeRepository.findFiveInitiativesForUser(user);
-    console.log(initiatives);
     return res.success(initiatives);
 };
