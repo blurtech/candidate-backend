@@ -7,4 +7,6 @@ const cntr = require('./controllers');
 //POST /swipe body = {id, vote}
 router.post('/', authenticateMiddleware, cntr.swipe);
 
+router.get('/next-swipes', authenticateMiddleware, cntr.getForSwipes);
+
 module.exports = router;
