@@ -2,6 +2,8 @@ const mongoose = require('mongoose'),
     uniqueValidator = require('mongoose-unique-validator'),
     bcrypt = require('bcrypt-nodejs');
 
+const initative = require('../initiative/model');
+
 const { Schema } = mongoose;
 
 const definition = {

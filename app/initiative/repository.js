@@ -1,4 +1,5 @@
 const Initiative = require('./model');
+const User = require('../user/model');
 
 const saveInitiative = (data, saveCb) => {
     const user = new Initiative(data);
@@ -17,6 +18,12 @@ const findInitiativeByID = (id) => Initiative.findById(id);
 const findInitiativesByID = (idArr) => Initiative.where('_id').in(idArr);
 
 const findAllInitiatives = () => Initiative.find();
+
+const findFiveInitiativesForUser = async (username) => {
+    const notIn = await User.findUserByUsername(username).select('history');
+
+    return Initiative.find({}, {_id: { $nin: notIn}});
+};
 
 const addUserToInitiative = async (Initiative, user, saveCb) => {
     const _Initiative = await Initiative.findById(Initiative.id);
@@ -39,5 +46,6 @@ module.exports = {
     findInitiativesByID,
     findAllInitiatives,
     addUserToInitiative,
-    removeUserFromInitiative
+    removeUserFromInitiative,
+    findFiveInitiativesForUser
 };
