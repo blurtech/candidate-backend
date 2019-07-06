@@ -6,15 +6,22 @@ const definition = {
         type: String,
         required: [true, 'Creator required']
     },
-    voters: [{type:Schema.Types.ObjectId, ref: 'User'}],
-    city: {
-            type: String
-    },
     title: {
         type: String
     },
     describe: {
         type: String
+    },
+    voters: [{type:Schema.Types.ObjectId, ref: 'User'}],
+    geo: {
+        city: {
+            type: String,
+            required: [true, 'City required']
+        },
+        district: {
+            type: String,
+            required: [true, 'District required']
+        }
     }
 };
 

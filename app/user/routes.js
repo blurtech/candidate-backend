@@ -22,7 +22,6 @@ router.get('/profile/:username', authenticateMiddleware, controller.profile);
  * Export a router with paths
  * POST: /
  * POST: /login
- * POST: /register
  * GET: /profile
  * PATCH: /profile
  * GET: /profile/:username
