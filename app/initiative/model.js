@@ -7,7 +7,11 @@ const definition = {
         required: [true, 'Creator required']
     },
     title: {
-        type: String
+        type: String,
+        validate: {
+            validator: (v) =>  v.length < 100,
+            message: 'Title must be short then 100 symbols!'
+        }
     },
     describe: {
         type: String
