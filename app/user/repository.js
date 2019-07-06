@@ -1,4 +1,5 @@
 const User = require('./model');
+const Initiative = require('../initiative/repository');
 
 const saveUser = (data, saveCb) => {
     const user = new User(data);
@@ -63,6 +64,15 @@ const removeInitiativeFromUser = async (user, initiativeId, saveCb) => {
     return _user.save(saveCb);
 };
 
+const voteForInitiative = async (user, initiativeId, _vote,saveCb) => {
+    //console.log(user + " " + initiativeId+ " "+ _vote);
+    //const _user = await User.findById(user.id);
+    //console.log(user);
+    //const _initiative = Initiative.findInitiativeByID(initiativeId);
+    await user.history.push({initiative: initiativeId, vote: _vote});
+    return user.save(saveCb);
+};
+
 const selectUserPublicInfo = (user) => User.findById(user.id).select({token: 0, password: 0});
 
 module.exports = {
@@ -74,5 +84,6 @@ module.exports = {
     findUsernamesById,
     selectUserPublicInfo,
     addInitiativeToUser,
-    removeInitiativeFromUser
+    removeInitiativeFromUser,
+    voteForInitiative
 };

@@ -1,4 +1,7 @@
 const Initiative = require('./model');
+const User = require('../user/model');
+const UserRepository = require('../user/repository');
+
 
 const saveInitiative = (data, saveCb) => {
     const user = new Initiative(data);
@@ -17,6 +20,15 @@ const findInitiativeByID = (id) => Initiative.findById(id);
 const findInitiativesByID = (idArr) => Initiative.where('_id').in(idArr);
 
 const findAllInitiatives = () => Initiative.find();
+
+const findFiveInitiativesForUser = async (username) => {
+    //console.log(username.history);
+    //let notIn = await UserRepository.findUserByID(username.id);
+
+    notIn = username.history.map(val => val.initiative._id);
+    //console.log(notIn);
+    return Initiative.find({id: { $nin: notIn}}).limit(5);
+};
 
 const addUserToInitiative = async (Initiative, user, saveCb) => {
     const _Initiative = await Initiative.findById(Initiative.id);
@@ -39,5 +51,6 @@ module.exports = {
     findInitiativesByID,
     findAllInitiatives,
     addUserToInitiative,
-    removeUserFromInitiative
+    removeUserFromInitiative,
+    findFiveInitiativesForUser
 };
