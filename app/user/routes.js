@@ -14,6 +14,8 @@ router.get('/profile', authenticateMiddleware, controller.currentUser);
 
 router.patch('/profile', authenticateMiddleware, controller.editProfile);
 
+router.post('/register', controller.register);
+
 /**
  * Export a router with paths
  * POST: /

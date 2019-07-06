@@ -37,6 +37,50 @@ exports.login = (req, res) => {
     })(req, res);
 };
 
+exports.register = (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+    const geo = req.body.geo;
+
+    if(!username) {
+        return res.validationError({
+            errors: [{
+                path: 'username',
+                message: 'Please pass username'
+            }]
+        });
+    }
+
+    if(!password) {
+        return res.validationError({
+            errors: [{
+                path: 'password',
+                message: 'Please pass password'
+            }]
+        });
+    }
+
+    if(!geo || !geo.city || !geo.district) {
+        return res.validationError({
+            errors: [{
+                path: 'password',
+                message: 'Please pass geo'
+            }]
+        });
+    }
+
+    repository.saveUser({
+        username,
+        password,
+        geo
+    }, (err) => {
+        if (err) {
+            return res.validationError(err);
+        }
+        return res.success({message: 'Successful created new user'});
+    });
+};
+
 exports.profile = async (req, res) => {
     const username = req.params.username;
     const user = await repository.findUserByUsername(username);
