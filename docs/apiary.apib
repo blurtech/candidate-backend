@@ -25,6 +25,38 @@ HOST: http://api.candidate.blur.tech
             }
         }
 
+### Получение всех положительных голосов [GET/user/positive]
+
+
++ Request
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkMjA1MTZhNzRjZTdmNWYwYzZhZTUxNCIsInVzZXJuYW1lIjoiTWFjT1NPIiwiaWF0IjoxNTYyNDE5NDE3fQ.iUkaK5EAp89bXi4nKrYIn3upNAjTe6VxE4uQOcnBpIg
+
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data": [
+                {
+                    "geo": {
+                        "city": "Новосибирск",
+                        "district": "Советский"
+                    },
+                    "voters": [
+                        "5d20516a74ce7f5f0c6ae514"
+                    ],
+                    "_id": "5d20e8e5cb8c490017650957",
+                    "describe": "мы предлагаем вам СХС",
+                    "title": "мы предлагаем вам СХС",
+                    "creator": "MacOSO",
+                    "createdAt": "2019-07-06T18:31:01.916Z",
+                    "updatedAt": "2019-07-06T18:31:01.916Z",
+                    "__v": 0
+                }
+            ]
+        }
+
 ### Авторизация [POST]
 
 + Request 200 (application/json)

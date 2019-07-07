@@ -12,6 +12,8 @@ router.get('/', authenticateMiddleware, controller.tryWithJWT);
 
 router.get('/profile', authenticateMiddleware, controller.currentUser);
 
+router.get('/positive', authenticateMiddleware, controller.positiveSwipes);
+
 router.patch('/profile', authenticateMiddleware, controller.editProfile);
 
 router.post('/register', controller.register);
