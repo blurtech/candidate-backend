@@ -1,8 +1,8 @@
 const userRepository = require('../user/repository');
 const initiativeRepository = require('../initiative/repository');
 
-exports.getAllOrgsInitiatives = async (req, res) => {
-    const data = await initiativeRepository.getAllOrgsInitiatives();
+exports.getAllOrgInitiatives = async (req, res) => {
+    const data = await initiativeRepository.getAllOrgInitiatives();
     return res.success(data);
 };
 

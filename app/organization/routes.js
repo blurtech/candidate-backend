@@ -4,8 +4,8 @@ const authenticateMiddleware = require('../../middlewares/authenticateMiddleware
 const router = express.Router();
 const ctrl = require('./controllers');
 
-router.get('/:username', authenticateMiddleware, ctrl.getInitiativesByOrg);
+router.get('/initiatives', ctrl.getAllOrgInitiatives);
 
-router.get('/initiatives', ctrl.getAllOrgsInitiatives);
+router.get('/:username', authenticateMiddleware, ctrl.getInitiativesByOrg);
 
 module.exports = router;

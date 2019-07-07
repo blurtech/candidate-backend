@@ -13,7 +13,7 @@ exports.editInitiative = (Initiative, data, saveCb) => {
     return Initiative.save(saveCb);
 };
 
-exports.getAllOrgsInitiatives = () => Initiative.find({isOrg: true});
+exports.getAllOrgInitiatives = () => Initiative.find({isOrg: true});
 
 exports.deleteInitiative = (Initiative) => Initiative.remove();
 
