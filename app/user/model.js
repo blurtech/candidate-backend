@@ -39,6 +39,18 @@ const definition = {
         type: Boolean,
         default: false
     },
+    experience: {
+        currentexp: {
+            type: Number,
+            required: true,
+            default: 0
+        },
+        level: {
+            type: Number,
+            required: true,
+            default: 1
+        }
+    },
     token: String
 };
 
