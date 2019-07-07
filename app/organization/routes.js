@@ -6,4 +6,6 @@ const ctrl = require('./controllers');
 
 router.get('/:username', authenticateMiddleware, ctrl.getInitiativesByOrg);
 
+router.get('/initiatives', ctrl.getAllOrgsInitiatives);
+
 module.exports = router;

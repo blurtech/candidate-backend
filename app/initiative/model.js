@@ -41,6 +41,10 @@ const definition = {
                 enum : ['Like', 'Dislike', 'Superlike']
             }
         }],
+    isOrg: {
+        type: Boolean,
+        default: false
+    }
 };
 
 const options = {
