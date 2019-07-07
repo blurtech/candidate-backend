@@ -34,6 +34,9 @@ const definition = {
         enum: ['Орган муниципальной власти', 'Департамент', 'ЖКХ']
     },
     preferences: [String],
+    name: {
+        type: String
+    },
     history: [
         {
             initiative: {type:Schema.Types.ObjectId, ref: 'Initiative'},
