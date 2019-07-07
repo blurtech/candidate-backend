@@ -30,7 +30,17 @@ const definition = {
             type: String,
             required: [true, 'District required']
         }
-    }
+    },
+    history: [
+        {
+            dateOfVoting: {
+                type: Date
+            },
+            vote: {
+                type: String,
+                enum : ['Like', 'Dislike', 'Superlike']
+            }
+        }],
 };
 
 const options = {
