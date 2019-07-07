@@ -81,7 +81,7 @@ exports.voteForInitiative = async (user, initiativeId, _vote,saveCb) => {
 exports.addExperience = async (user, value, saveCb) => {
       user.experience.currentexp += value;
       if (user.experience.currentexp >= 1000) {
-          user.experience.level += user.experience.currentexp / 1000;
+          user.experience.level = Math.floor(user.experience.level + 1);
           user.experience.currentexp = user.experience.currentexp % 1000;
       }
       return await user.save(saveCb);
