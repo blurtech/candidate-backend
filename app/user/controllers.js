@@ -45,7 +45,8 @@ exports.login = (req, res) => {
             }
             const payload = {
                 id: user.id,
-                username: user.username
+                username: user.username,
+                isOrg: user.isOrg
             };
             const token = jwt.sign(payload, secret);
             repository.findUserByID(user.id)

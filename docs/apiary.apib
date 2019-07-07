@@ -359,3 +359,39 @@ HOST: http://api.candidate.blur.tech
             }
             ]
         }
+
+## Организации [/organization]
+
+### Получение инициативы по логину организации [GET/organization/{username}]
+
++ Parameters
+    + `username` (string, required) - логин организации
+
++ Request
+    + Headers
+
+            Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkMjA1MTZhNzRjZTdmNWYwYzZhZTUxNCIsInVzZXJuYW1lIjoiTWFjT1NPIiwiaWF0IjoxNTYyNDE5NDE3fQ.iUkaK5EAp89bXi4nKrYIn3upNAjTe6VxE4uQOcnBpIg
+
++ Response 200 (application/json)
+
+        {
+            "success": true,
+            "data": [
+                {
+                    "title": "Ремонт дороги на Федосеева",
+                    "geo": {
+                        "city": "Новосибирск",
+                        "district": "Октябрьский"
+                    },
+                    "voters": [
+                        "5d20516a74ce7f5f0c6ae514"
+                    ],
+                    "_id": "5d209654562592316cdc1800",
+                    "describe": "На улице Федосеева 10 после проведения сезонных мероприятий повредилось дорожное полотно, которое требует восстановления, иначе ямы начнут работать как лежачий полицейский, что в условиях крутого поворота возле школы не лучшая затея.",
+                    "creator": "lennsk",
+                    "createdAt": "2019-07-06T12:38:44.345Z",
+                    "updatedAt": "2019-07-06T12:38:44.345Z",
+                    "__v": 0
+                }
+            ]
+        }
