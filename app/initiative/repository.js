@@ -49,8 +49,8 @@ exports.updateRatingByVote = async (initiative, vote, saveCb) => {
 };
 
 exports.updateHistory = async (initiative, vote, saveCb) => {
-    const _Initiative = await Initiative.find({_id: initiative});
-    console.log(_Initiative);
-    _Initiative.history.push({dateOfVoting: Date.now(), vote: vote});
-    return await _Initiative.save(saveCb);
+    //const _Initiative = await Initiative.find({_id: initiative});
+    await Initiative.findOneAndUpdate({_id: initiative}, {$push: {history: {dateOfVoting: Date.now(), vote: vote}}});
+    //await _Initiative.history.push({dateOfVoting: Date.now(), vote: vote});
+    //return await _Initiative.save(saveCb);
 };

@@ -22,6 +22,7 @@ router.post('/register', controller.register);
 
 router.get('/rating', authenticateMiddleware, controller.userRating);
 
+router.get('/exp', authenticateMiddleware, controller.userExperience);
 /**
  * Export a router with paths
  * POST: /
