@@ -6,9 +6,11 @@ const repository = require('./repository');
 const initiativeRepository = require('../initiative/repository');
 
 exports.tryWithJWT = (req, res) => {
+    console.log(req.user);
     const payload = {
         id: req.user.id,
-        username: req.user.username
+        username: req.user.username,
+        isOrg: req.user.isOrg
     };
     res.success(payload);
 };
