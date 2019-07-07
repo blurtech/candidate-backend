@@ -104,6 +104,12 @@ exports.profile = async (req, res) => {
     return res.success(user);
 };
 
+exports.userInitiatives = async (req, res) => {
+    const username = req.user.username;
+    const data = await initiativeRepository.findAllInitiativesByUsername(username);
+    return res.success(data);
+};
+
 exports.currentUser = async (req, res) => {
     const user_info = await repository.selectUserPublicInfo(req.user);
     return res.success(user_info);
