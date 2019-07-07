@@ -61,6 +61,16 @@ const addInitiativeToUser = async (user, initiativeId, saveCb) => {
 
 const removeInitiativeFromUser = addInitiativeToUser;
 
+const positiveSwipesHistory = async (username) => {
+    let positiveSwipes = username.history.map(val => {
+        if(val.vote === "Like" || val.vote === "Superlike") {
+            return val.initiative._id;
+        }
+    });
+    let result = await Initiative.findInitiativesByID(positiveSwipes);
+    return result;
+};
+
 const voteForInitiative = async (user, initiativeId, _vote,saveCb) => {
     await user.history.push({initiative: initiativeId, vote: _vote});
     return user.save(saveCb);
@@ -78,5 +88,6 @@ module.exports = {
     selectUserPublicInfo,
     addInitiativeToUser,
     removeInitiativeFromUser,
-    voteForInitiative
+    voteForInitiative,
+    positiveSwipesHistory
 };

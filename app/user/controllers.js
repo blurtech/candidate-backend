@@ -13,6 +13,23 @@ exports.tryWithJWT = (req, res) => {
     res.success(payload);
 };
 
+exports.positiveSwipes = async (req, res) => {
+    const user = req.user;
+
+    if(!user) {
+        return res.validationError({
+            errors: [{
+                path: 'creator',
+                message: 'Need user for get all positive swipes list'
+            }]
+        });
+    }
+
+    let data = await repository.positiveSwipesHistory(user);
+    !data.length ? res.notFound() : res.success(data);
+};
+
+
 exports.login = (req, res) => {
     passport.authenticate('local', {session: false}, (err, user, info) => {
         if (err || !user) {
