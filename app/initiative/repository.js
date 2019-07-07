@@ -21,6 +21,8 @@ const findInitiativesByID = (idArr) => Initiative.where('_id').in(idArr);
 
 const findAllInitiatives = () => Initiative.find();
 
+const findAllInitiativesByUsername = (username) => Initiative.find({creator: username});
+
 const findInitiativesForUser = async (username) => {
     let notIn = username.history.map(val => val.initiative._id);
     let finded = await Initiative.find({_id: { $nin: notIn}});
@@ -49,5 +51,6 @@ module.exports = {
     findAllInitiatives,
     addUserToInitiative,
     removeUserFromInitiative,
-    findInitiativesForUser
+    findInitiativesForUser,
+    findAllInitiativesByUsername
 };
