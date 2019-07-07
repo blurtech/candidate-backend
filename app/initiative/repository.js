@@ -40,6 +40,12 @@ const removeUserFromInitiative = async (Initiative, user, saveCb) => {
     await Initiative.find({ voters: { $exists: true, $size: 0}}).remove().exec();
 };
 
+const updateRatingByVote = async (Initiative, vote, saveCb) => {
+    const _Initiative = await Initiative.findById(Initiative.id);
+    _Initiative.rating += (vote === 'Dislike') ? -1 : 1;;
+    return await _Initiative.save(saveCb);
+};
+
 module.exports = {
     saveInitiative,
     editInitiative,
@@ -49,5 +55,6 @@ module.exports = {
     findAllInitiatives,
     addUserToInitiative,
     removeUserFromInitiative,
-    findInitiativesForUser
+    findInitiativesForUser,
+    updateRatingByVote
 };

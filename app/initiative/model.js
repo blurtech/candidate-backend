@@ -17,6 +17,10 @@ const definition = {
         type: String
     },
     voters: [{type:Schema.Types.ObjectId, ref: 'User'}],
+    rating: {
+        type: Number,
+        default: 0
+    },
     geo: {
         city: {
             type: String,
