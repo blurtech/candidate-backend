@@ -1,12 +1,12 @@
 const User = require('./model');
 const Initiative = require('../initiative/repository');
 
-const saveUser = (data, saveCb) => {
+exports.saveUser = (data, saveCb) => {
     const user = new User(data);
     return user.save(saveCb);
 };
 
-const editUser = (user, data, saveCb) => {
+exports.editUser = (user, data, saveCb) => {
     if (data.password) {
         if (!data.check_password) {
             return saveCb({errors: [{
@@ -46,22 +46,24 @@ const editUser = (user, data, saveCb) => {
     return user.save(saveCb);
 };
 
-const deleteUser = (user) => user.remove();
+exports.deleteUser = (user) => user.remove();
 
-const findUserByID = (id) => User.findById(id);
+exports.findUserByID = (id) => User.findById(id);
 
-const findUserByUsername = (username) => User.findOne({username}).select({token: 0, password: 0, email: 0});
+exports.findUserByUsername = (username) => User.findOne({username}).select({token: 0, password: 0, email: 0});
 
-const findUsernamesById = (idArr) => User.where('_id').in(idArr).select('username');
+exports.findUsernamesById = (idArr) => User.where('_id').in(idArr).select('username');
 
-const addInitiativeToUser = async (user, initiativeId, saveCb) => {
+exports.addInitiativeToUser = addInitiativeToUser;
+
+exports.removeInitiativeFromUser = addInitiativeToUser;
+
+async function addInitiativeToUser(user, initiativeId, saveCb) {
     const _user = await User.findById(user.id);
     return _user.save(saveCb);
-};
+}
 
-const removeInitiativeFromUser = addInitiativeToUser;
-
-const positiveSwipesHistory = async (username) => {
+exports.positiveSwipesHistory = async (username) => {
     let positiveSwipes = username.history.map(val => {
         if(val.vote === "Like" || val.vote === "Superlike") {
             return val.initiative._id;
@@ -71,23 +73,9 @@ const positiveSwipesHistory = async (username) => {
     return result;
 };
 
-const voteForInitiative = async (user, initiativeId, _vote,saveCb) => {
+exports.voteForInitiative = async (user, initiativeId, _vote,saveCb) => {
     await user.history.push({initiative: initiativeId, vote: _vote});
     return user.save(saveCb);
 };
 
-const selectUserPublicInfo = (user) => User.findById(user.id).select({token: 0, password: 0});
-
-module.exports = {
-    saveUser,
-    editUser,
-    deleteUser,
-    findUserByID,
-    findUserByUsername,
-    findUsernamesById,
-    selectUserPublicInfo,
-    addInitiativeToUser,
-    removeInitiativeFromUser,
-    voteForInitiative,
-    positiveSwipesHistory
-};
+exports.selectUserPublicInfo = (user) => User.findById(user.id).select({token: 0, password: 0});

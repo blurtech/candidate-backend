@@ -24,7 +24,14 @@ const definition = {
         district: {
             type: String,
             required: [true, 'District required']
+        },
+        address: {
+            type: String
         }
+    },
+    category: {
+        type: String,
+        enum: ['Орган муниципальной власти', 'Департамент', 'ЖКХ']
     },
     preferences: [String],
     history: [

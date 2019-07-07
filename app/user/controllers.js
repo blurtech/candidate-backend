@@ -6,9 +6,11 @@ const repository = require('./repository');
 const initiativeRepository = require('../initiative/repository');
 
 exports.tryWithJWT = (req, res) => {
+    console.log(req.user);
     const payload = {
         id: req.user.id,
-        username: req.user.username
+        username: req.user.username,
+        isOrg: req.user.isOrg
     };
     res.success(payload);
 };
@@ -43,7 +45,8 @@ exports.login = (req, res) => {
             }
             const payload = {
                 id: user.id,
-                username: user.username
+                username: user.username,
+                isOrg: user.isOrg
             };
             const token = jwt.sign(payload, secret);
             repository.findUserByID(user.id)
@@ -108,6 +111,12 @@ exports.userInitiatives = async (req, res) => {
     const username = req.user.username;
     const data = await initiativeRepository.findAllInitiativesByUsername(username);
     return res.success(data);
+};
+
+exports.userRating = async (req, res) => {
+    const username = req.user.username;
+    let data = await initiativeRepository.findAllInitiativesByUsername(username);
+    return res.success(data.reduce((acc, val) => acc + val.rating, 0));
 };
 
 exports.currentUser = async (req, res) => {
