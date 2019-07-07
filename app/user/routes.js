@@ -20,6 +20,8 @@ router.patch('/profile', authenticateMiddleware, controller.editProfile);
 
 router.post('/register', controller.register);
 
+router.get('/rating', authenticateMiddleware, controller.userRating);
+
 /**
  * Export a router with paths
  * POST: /

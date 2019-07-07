@@ -31,11 +31,21 @@ exports.create = (req, res) => {
 };
 
 exports.getAll = (req, res) => {
-    return repository.findAllInitiatives().then((data) => {
-        return res.success(data);
-    }).catch((err) => {
-        return res.unprocessableEntity(err);
-    });
+    if (req.query.byuser && req.query.byuser === 'true') {
+        console.log("worked! "+ typeof(req.query.byuser));
+        return repository.findAllInitiativesByUsername(req.user.username).then((data) => {
+            return res.success(data);
+        }).catch((err) => {
+            return res.unprocessableEntity(err);
+        })
+    }
+    else {
+        return repository.findAllInitiatives().then((data) => {
+            return res.success(data);
+        }).catch((err) => {
+            return res.unprocessableEntity(err);
+        });
+    }
 };
 
 exports.getOne = (req, res) => {

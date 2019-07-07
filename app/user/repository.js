@@ -78,6 +78,8 @@ const voteForInitiative = async (user, initiativeId, _vote,saveCb) => {
 
 const selectUserPublicInfo = (user) => User.findById(user.id).select({token: 0, password: 0});
 
+
+
 module.exports = {
     saveUser,
     editUser,
