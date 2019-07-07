@@ -16,7 +16,8 @@ exports.create = (req, res) => {
 
     data.creator = creator.username;
     data.voters = [creator._id];
-
+    if(creator.isOrg) data.isOrg = true;
+    console.log(data);
     repository.saveInitiative(data, (err, data) => {
         if (err) {
             return res.validationError(err);
@@ -37,7 +38,7 @@ exports.getAll = (req, res) => {
             return res.success(data);
         }).catch((err) => {
             return res.unprocessableEntity(err);
-        })
+        });
     }
     else {
         return repository.findAllInitiatives().then((data) => {
