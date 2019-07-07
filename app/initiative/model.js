@@ -17,6 +17,10 @@ const definition = {
         type: String
     },
     voters: [{type:Schema.Types.ObjectId, ref: 'User'}],
+    rating: {
+        type: Number,
+        default: 0
+    },
     geo: {
         city: {
             type: String,
@@ -26,7 +30,17 @@ const definition = {
             type: String,
             required: [true, 'District required']
         }
-    }
+    },
+    history: [
+        {
+            dateOfVoting: {
+                type: Date
+            },
+            vote: {
+                type: String,
+                enum : ['Like', 'Dislike', 'Superlike']
+            }
+        }],
 };
 
 const options = {
