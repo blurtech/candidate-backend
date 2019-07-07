@@ -16,7 +16,7 @@ exports.swipe = (req, res) => {
 
     userRepository.voteForInitiative(user, data.id, data.vote);
     initiativeRepository.updateRatingByVote(data.id, data.vote);
-
+    initiativeRepository.updateHistory(data.id, data.vote);
     return res.success(null);
 };
 

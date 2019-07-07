@@ -112,6 +112,12 @@ exports.userInitiatives = async (req, res) => {
     return res.success(data);
 };
 
+exports.userRating = async (req, res) => {
+    const username = req.user.username;
+    let data = await initiativeRepository.findAllInitiativesByUsername(username);
+    return res.success(data.reduce((acc, val) => acc + val.rating, 0));
+};
+
 exports.currentUser = async (req, res) => {
     const user_info = await repository.selectUserPublicInfo(req.user);
     return res.success(user_info);

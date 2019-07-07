@@ -45,3 +45,10 @@ exports.removeUserFromInitiative = async (Initiative, user, saveCb) => {
 exports.updateRatingByVote = async (initiative, vote, saveCb) => {
     return await Initiative.findOneAndUpdate({_id: initiative}, {$inc: {rating: (vote === 'Dislike') ? -1 : 1}});
 };
+
+exports.updateHistory = async (initiative, vote, saveCb) => {
+    const _Initiative = await Initiative.find({_id: initiative});
+    console.log(_Initiative);
+    _Initiative.history.push({dateOfVoting: Date.now(), vote: vote});
+    return await _Initiative.save(saveCb);
+};
