@@ -50,7 +50,7 @@ exports.deleteUser = (user) => user.remove();
 
 exports.findUserByID = (id) => User.findById(id);
 
-exports.findUserByUsername = (username) => User.findOne({username}).select({token: 0, password: 0, email: 0});
+exports.findUserByUsername = (username) => User.findOne({username}).select({token: 0, password: 0});
 
 exports.findUsernamesById = (idArr) => User.where('_id').in(idArr).select('username');
 
